@@ -17,7 +17,8 @@ pred PartialOrder [R: Elem -> Elem] {
 // total order: partial order and a ≤ b o b ≤ a
 pred TotalOrder [R: Elem -> Elem] {
 	PartialOrder[R]
-	all x, y: Elem | x -> y in R or y -> x in R
+	(univ->univ) in (R + ~R) // preguntar Elem -> Elem in (R + ~R)
+	//all x, y: Elem | x -> y in R or y -> x in R
 }
 
 //strict order: Irreflexive, Asymmetric, Transitive
@@ -38,11 +39,11 @@ pred HasLastElement [R: Elem -> Elem]{
 
 //assertions
 assert allPartialTotal {
-    all R:(Elem -> Elem) | PartialOrder[R] implies TotalOrder[R] // and or implies?
+    all R:Elem -> Elem | PartialOrder[R] implies TotalOrder[R] // and or implies?
 }
 
 assert allPartialHasFirst {
-    all R:(Elem -> Elem) | PartialOrder[R] and HasFirstElement[R] // and or implies?
+    all R:(Elem -> Elem) | PartialOrder[R] implies HasFirstElement[R] // and or implies?
 }
 
 //todo orden total con primer elemento x y ´ultimo elemento y satisface x != y;
@@ -62,8 +63,8 @@ assert StrictCompositionIsStrict {
 	all R, S:(Elem -> Elem) | StrictOrder[R] and StrictOrder[S] implies StrictOrder[R.S]
 }
 
-//check allPartialTotal for 5
+check allPartialTotal for 5
 //check allPartialHasFirst for 5
 //check allTotalWithFirstAndLast for 5
 //check StrictUnionIsStrict for 5
-check StrictCompositionIsStrict for 5
+//check StrictCompositionIsStrict for 5
