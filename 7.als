@@ -31,7 +31,7 @@ pred remove[ca,ca_out:Catalogo, c:Cancion, i:Interprete]{
 
 //b) Una funcion que, dado un catalogo, devuelva los pares de interpretes que interpretan la misma cancion
 fun interpretesMismaCancion(ca: Catalogo): set (Interprete -> Interprete) {
-  (~ca.interpretaciones . ca.interpretaciones) //???
+  (~(ca.interpretaciones) . (ca.interpretaciones)) - iden
 }
 
 
